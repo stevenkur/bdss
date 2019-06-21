@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-12">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="unfolding.0.9.6.jar"/>
+	<classpathentry kind="lib" path="jogl-all.jar"/>
+	<classpathentry kind="lib" path="core.jar"/>
+	<classpathentry kind="lib" path="gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="jogl-all-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="json4processing.jar"/>
+	<classpathentry kind="lib" path="libTUIO.jar"/>
+	<classpathentry kind="lib" path="log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
