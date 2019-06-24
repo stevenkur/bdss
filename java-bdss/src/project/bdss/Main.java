@@ -189,26 +189,27 @@ public class Main {
 		JFileChooser fileChooser = filePicker.getFileChooser();
 		fileChooser.setCurrentDirectory(new File("C:/"));
 		insertPanel.add(filePicker);
-		
+
 		btnUpload = new JButton("UPLOAD");
 		btnUpload.setBounds(275, 275, 100, 30);
 		btnUpload.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(filePicker.getSelectedFilePath());
 				// call python
-				try {
-					String prg = "import sys";
-					BufferedWriter out = new BufferedWriter(new FileWriter("path/a.py"));
-					out.write(prg);
-					out.close();
-					Process p = Runtime.getRuntime().exec("python path/a.py");
-					BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-					String ret = in.readLine();
-					System.out.println("value is : "+ret);
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
+//				try {
+//					String prg = "import sys";
+//					BufferedWriter out = new BufferedWriter(new FileWriter("path/a.py"));
+//					out.write(prg);
+//					out.close();
+//					Process p = Runtime.getRuntime().exec("python path/a.py");
+//					BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//					String ret = in.readLine();
+//					System.out.println("value is : "+ret);
+//				} catch (Exception e2) {
+//					// TODO: handle exception
+//				}
 			}
 		});
 		insertPanel.add(btnUpload);

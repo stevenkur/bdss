@@ -23,6 +23,8 @@ public class JFilePicker extends JPanel {
     private int mode;
     public static final int MODE_OPEN = 1;
     public static final int MODE_SAVE = 2;
+    
+    public String filePath;
      
     public JFilePicker(String textFieldLabel, String buttonLabel) {
         this.textFieldLabel = textFieldLabel;
@@ -54,11 +56,13 @@ public class JFilePicker extends JPanel {
     private void buttonActionPerformed(ActionEvent evt) {
         if (mode == MODE_OPEN) {
             if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            	filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                textField.setText(filePath);
             }
         } else if (mode == MODE_SAVE) {
             if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-                textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+            	filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                textField.setText(filePath);
             }
         }
     }
