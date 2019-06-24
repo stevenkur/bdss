@@ -4,52 +4,98 @@ import com.microsoft.azure.storage.table.TableServiceEntity;
 
 public class STTrajectory extends TableServiceEntity {
 
-	String matchedEdgeLat;
-	String matchedEdgeLong;
-	String matchedNodeLat;
-	String matchedNodeLong;
-	
-	public STTrajectory(String matchedEdgeLat, String matchedEdgeLong, String matchedNodeLat, String matchedNodeLong) {
-		super();
-		this.matchedEdgeLat = matchedEdgeLat;
-		this.matchedEdgeLong = matchedEdgeLong;
-		this.matchedNodeLat = matchedNodeLat;
-		this.matchedNodeLong = matchedNodeLong;
-	}
+	String hour;
+	String edge_id;
+	String s_long;
+	String s_lat;
+	String e_long;
+	String e_lat;
+	String taxi_id;
+	String date;
+	String distance;
+	String speed;
 	
 	public STTrajectory() {
 		
 	}
-	
-	public String getMatchedEdgeLat() {
-		return matchedEdgeLat;
+
+	public String getHour() {
+		return hour;
 	}
 
-	public void setMatchedEdgeLat(String matchedEdgeLat) {
-		this.matchedEdgeLat = matchedEdgeLat;
+	public void setHour(String hour) {
+		this.hour = hour;
 	}
 
-	public String getMatchedEdgeLong() {
-		return matchedEdgeLong;
+	public String getEdge_id() {
+		return edge_id;
 	}
 
-	public void setMatchedEdgeLong(String matchedEdgeLong) {
-		this.matchedEdgeLong = matchedEdgeLong;
+	public void setEdge_id(String edge_id) {
+		this.edge_id = edge_id;
 	}
 
-	public String getMatchedNodeLat() {
-		return matchedNodeLat;
+	public String getS_long() {
+		return s_long;
 	}
 
-	public void setMatchedNodeLat(String matchedNodeLat) {
-		this.matchedNodeLat = matchedNodeLat;
+	public void setS_long(String s_long) {
+		this.s_long = s_long;
 	}
 
-	public String getMatchedNodeLong() {
-		return matchedNodeLong;
+	public String getS_lat() {
+		return s_lat;
 	}
 
-	public void setMatchedNodeLong(String matchedNodeLong) {
-		this.matchedNodeLong = matchedNodeLong;
+	public void setS_lat(String s_lat) {
+		this.s_lat = s_lat;
+	}
+
+	public String getE_long() {
+		return e_long;
+	}
+
+	public void setE_long(String e_long) {
+		this.e_long = e_long;
+	}
+
+	public String getE_lat() {
+		return e_lat;
+	}
+
+	public void setE_lat(String e_lat) {
+		this.e_lat = e_lat;
+	}
+
+	public String getTaxi_id() {
+		return taxi_id;
+	}
+
+	public void setTaxi_id(String taxi_id) {
+		this.taxi_id = taxi_id;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
+	}
+
+	public String getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(String speed) {
+		this.speed = speed;
 	}
 }

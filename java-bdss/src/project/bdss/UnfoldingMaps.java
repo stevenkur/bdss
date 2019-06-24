@@ -1,27 +1,29 @@
 package project.bdss;
 
+import processing.core.PApplet;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
-import de.fhpotsdam.unfolding.providers.Microsoft;
 import de.fhpotsdam.unfolding.utils.MapUtils;
-import processing.core.PApplet;
+import de.fhpotsdam.unfolding.providers.Google;
 
+@SuppressWarnings("serial")
 public class UnfoldingMaps extends PApplet {
  
-    UnfoldingMap map;
- 
-    public void setup() {
-		size(800, 500);
+	UnfoldingMap map;
 
-		map = new UnfoldingMap(this, 0, 0, 900, 600, new Microsoft.RoadProvider());
-		map.zoomAndPanTo(10, new Location(52.5f, 13.4f));
+	public void setup() {
+		size(800, 600, OPENGL);
+
+		map = new UnfoldingMap(this, new Google.GoogleMapProvider());
+		map.zoomAndPanTo(20, new Location(39.9310978, 116.3197656));
+
 		MapUtils.createDefaultEventDispatcher(this, map);
-    }
- 
-    public void draw() {
-        background(000);
-        size(800, 500);
-        map.draw();
-    }
+	}
+
+	public void draw() {
+		background(0);
+        resize(800, 600);
+		map.draw();
+	}
  
 }

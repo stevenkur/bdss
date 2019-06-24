@@ -270,6 +270,11 @@ public class Main {
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String startTime = tfStartTime.getText();
+				String duration = tfDuration.getText();
+				String latitude = tfLatitude.getText();
+				String longitude = tfLongitude.getText();
+				
 				PApplet.main(new String[] { UnfoldingMaps.class.getName() });
 			}
 		});
