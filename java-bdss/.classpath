@@ -19,5 +19,11 @@
 	<classpathentry kind="lib" path="json4processing.jar"/>
 	<classpathentry kind="lib" path="libTUIO.jar"/>
 	<classpathentry kind="lib" path="log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="azure-mgmt-resources-1.22.0.jar"/>
+	<classpathentry kind="lib" path="azure-storage-8.3.0.jar"/>
+	<classpathentry kind="lib" path="azure-storage-android-2.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="azure-storage-blob-11.0.1.jar"/>
+	<classpathentry kind="lib" path="azure-storage-queue-10.0.1-Preview.jar"/>
+	<classpathentry kind="lib" path="jackson-core-2.9.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

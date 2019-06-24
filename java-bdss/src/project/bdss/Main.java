@@ -14,7 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -40,6 +46,7 @@ public class Main {
 	private JTextField tfDuration;
 	private JTextField tfLatitude;
 	private JTextField tfLongitude;
+	private Connection con;
 
 	/**
 	 * Launch the application.
@@ -59,8 +66,14 @@ public class Main {
 
 	/**
 	 * Create the application.
+	 * @throws URISyntaxException 
+	 * @throws InvalidKeyException 
 	 */
-	public Main() {
+	public Main() throws InvalidKeyException, URISyntaxException {
+		con = new Connection();
+		con.Initialize();
+		con.ListTable();
+		
 		initialize();
 	}
 
@@ -179,6 +192,25 @@ public class Main {
 		
 		btnUpload = new JButton("UPLOAD");
 		btnUpload.setBounds(275, 275, 100, 30);
+		btnUpload.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// call python
+				try {
+					String prg = "import sys";
+					BufferedWriter out = new BufferedWriter(new FileWriter("path/a.py"));
+					out.write(prg);
+					out.close();
+					Process p = Runtime.getRuntime().exec("python path/a.py");
+					BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+					String ret = in.readLine();
+					System.out.println("value is : "+ret);
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		});
 		insertPanel.add(btnUpload);
 		
 		lblResponse = new JLabel("Response");
