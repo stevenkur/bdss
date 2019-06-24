@@ -9,7 +9,6 @@ def main():
 	match_results = pool.map(trajectory_matching, trajectory)
 	pool.close()
 	match_results = pd.concat(match_results, ignore_index=True)
-
 	match_results.to_csv(r'hasil_match.csv')
 
 if __name__ == "__main__":

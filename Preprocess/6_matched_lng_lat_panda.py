@@ -60,7 +60,7 @@ def ambil_data():
 			print(rows,'/',len(data))
 		with open(file_output, 'w',newline='') as out_file:
 			writer = csv.DictWriter(out_file, fieldnames=fields)
-			writer.writerow('TRAJ_ID', 'MATCHED_EDGE','s_lng','s_lat','e_lng','e_lat')
+			# writer.writerow(('TRAJ_ID', 'MATCHED_EDGE','s_lng','s_lat','e_lng','e_lat'))
 			writer.writerows(rowses)
 ambil_data()
 	# 		for row in reader:

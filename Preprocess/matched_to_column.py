@@ -4,8 +4,8 @@ import csv
 count= 0
 update = 0
 
-filename = '2.csv'
-tempfile = NamedTemporaryFile(mode='w', delete=False, newline='')
+filename = 'matched_trajectory.csv'
+tempfile = NamedTemporaryFile(mode='w', delete=False)
 
 fields = ['TRAJ_ID','TIMESTAMP','LON', 'LAT', 'TAXI', 'DATE']
 
@@ -14,21 +14,13 @@ with open(filename, 'r',newline='') as csvfile, tempfile:
     writer = csv.DictWriter(tempfile, fieldnames=fields)
     for row in reader:
         # print('updating row', row['TRAJ_ID'])
-        taxiid = row['TAXI']
+        taxiid = row['TRAJ_ID']
         datetime = row['TIMESTAMP']
         partitionkey = datetime.replace("-","")
         partitionkey_split = partitionkey.split(" ")
         splitkey = partitionkey_split[1].split(":")
         quarter = int(splitkey[1])//15
-        if (quarter == 0):
-            time = '15' 
-        if (quarter == 1):
-            time = '30' 
-        if (quarter == 2):
-            time = '45' 
-        if (quarter == 3):
-            time = '60' 
-        trajid = taxiid +'_'+partitionkey_split[0]+"_"+ splitkey[0]+'_'+time
+        trajid = splitkey[0]+'_'+str(quarter)
         # trajid = taxiid+splitkey[0]
         # split = datetime.split(" ")
         # date = split[0]
