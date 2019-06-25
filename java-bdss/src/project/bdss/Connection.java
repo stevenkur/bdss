@@ -8,6 +8,7 @@ import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.table.*;
 import com.microsoft.azure.storage.table.TableQuery.*;
 
+import project.bdss.data.CustomerEntity;
 import project.bdss.data.STTrajectoryEntity;
 
 public class Connection {
@@ -25,13 +26,6 @@ public class Connection {
 	public void ListTable() {
 		try
 		{
-		    // Retrieve storage account from connection-string.
-		    CloudStorageAccount storageAccount =
-		        CloudStorageAccount.parse(connectionString);
-
-		    // Create the table client.
-		    CloudTableClient tableClient = storageAccount.createCloudTableClient();
-
 		    // Loop through the collection of table names.
 		    for (String table : tableClient.listTables())
 		    {
@@ -52,11 +46,6 @@ public class Connection {
 		    // Define constants for filters.
 		    final String PARTITION_KEY = "PartitionKey";
 		    final String ROW_KEY = "RowKey";
-		    
-		    CloudStorageAccount storageAccount =
-			        CloudStorageAccount.parse(connectionString);
-		    
-		    CloudTableClient tableClient = storageAccount.createCloudTableClient();
 
 		    // Create a cloud table object for the table.
 		    CloudTable cloudTable = tableClient.getTableReference("STTrajectory"); // table name
@@ -81,13 +70,18 @@ public class Connection {
 		    // with the row key being up to the letter "E".
 		    TableQuery<STTrajectoryEntity> rangeQuery =
 		        TableQuery.from(STTrajectoryEntity.class)
-		        .where(partitionFilter);
+		        .where(combinedFilter);
 
 		    // Loop through the results, displaying information about the entity
 		    for (STTrajectoryEntity entity : cloudTable.execute(rangeQuery)) {
 		        System.out.println(entity.getPartitionKey() +
 		            " " + entity.getRowKey() +
+		            " " + entity.getS_long() +
+		            " " + entity.getS_lat() +
+		            " " + entity.getE_long() +
+		            " " + entity.getE_lat() +
 		            " " + entity.getTaxi_id() +
+		            " " + entity.getDistance() +
 		            " " + entity.getDate());
 		    }
 		}

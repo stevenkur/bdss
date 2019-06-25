@@ -70,13 +70,13 @@ with open('222.csv','r',newline='') as csvfile:
         entity = Entity()
         entity.PartitionKey = row['TRAJ_ID']
         entity.RowKey = row['MATCHED_EDGE']
-        entity.s_long = row['MATCHED_EDGE_S_LNG']
-        entity.s_lat = row['MATCHED_EDGE_S_LAT']
-        entity.e_long = row['MATCHED_EDGE_E_LNG']
-        entity.e_lat = row['MATCHED_EDGE_E_LAT']
-        entity.taxi_id = row['TAXI']
-        entity.date = row['DATE']
-        entity.distance = row['DISTANCE']
+        entity.S_long = row['MATCHED_EDGE_S_LNG']
+        entity.S_lat = row['MATCHED_EDGE_S_LAT']
+        entity.E_long = row['MATCHED_EDGE_E_LNG']
+        entity.E_lat = row['MATCHED_EDGE_E_LAT']
+        entity.Taxi_id = row['TAXI']
+        entity.Date = row['DATE']
+        entity.Distance = row['DISTANCE']
         table_service.insert_entity('STTrajectory', entity)
 
 

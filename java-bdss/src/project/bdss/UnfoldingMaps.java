@@ -20,6 +20,7 @@ public class UnfoldingMaps extends PApplet {
 		MapUtils.createDefaultEventDispatcher(this, map);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void draw() {
 		background(0);
         resize(800, 600);

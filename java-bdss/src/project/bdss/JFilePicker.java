@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
  
 public class JFilePicker extends JPanel {
-    private String textFieldLabel;
+    
+	private String textFieldLabel;
     private String buttonLabel;
      
     private JLabel label;
