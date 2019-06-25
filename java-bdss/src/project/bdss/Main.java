@@ -282,7 +282,8 @@ public class Main {
 				
 				startTime = startTime.replace(":","");
 				
-				con.QueryST(startTime, duration, edge);
+				//con.QueryST(startTime, duration, edge);
+				con.QueryST("0015", "10", "23362");
 				
 				//PApplet.main(new String[] { UnfoldingMaps.class.getName() });
 			}

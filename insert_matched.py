@@ -3,7 +3,7 @@ from azure.cosmosdb.table.models import Entity
 from tempfile import NamedTemporaryFile
 import shutil
 import csv
-import geopy.distance
+from more_itertools import unique_everseen
 
 the_connection_string = "DefaultEndpointsProtocol=https;AccountName=bigdatasystem;AccountKey=dlGS2h7vRiEdwRjGw1R2UqCr3QcJUGzfQjeyULj12Ssf1NtKwA11upx3uu1x1KLTBUzX00waXTelLQfY6oQ9BA==;TableEndpoint=https://bigdatasystem.table.cosmos.azure.com:443/;"
 table_service = TableService(endpoint_suffix = "table.cosmos.azure.com", connection_string = the_connection_string)
@@ -22,7 +22,8 @@ fields = ['TRAJ_ID',
 'TIMESTAMP'
 ]
 
-with open(filename,'r',newline='') as csvfile, tempfile:
+seen = set() # set for fast O(1) amortized lookup
+with open(filename,'r',newline='') as csvfile, open('222.csv','w') as out_file:
     reader = csv.DictReader(csvfile, fieldnames=fields)
     # writer = csv.DictWriter(tempfile, fieldnames=fields)
     for row in reader:
@@ -55,23 +56,28 @@ with open(filename,'r',newline='') as csvfile, tempfile:
         # 'DISTANCE': row['DISTANCE'],
         # 'TIMESTAMP': row['TIMESTAMP']
         # }
-        entity = Entity()
-		entity.PartitionKey = row['TRAJ_ID']
-		entity.RowKey = row['MATCHED_EDGE']
-		entity.s_long = row['MATCHED_EDGE_S_LNG']
-		entity.s_lat = row['MATCHED_EDGE_S_LAT']
-		entity.e_long = row['MATCHED_EDGE_E_LNG']
-		entity.e_lat = row['MATCHED_EDGE_E_LAT']
-		entity.taxi_id = row['TAXI']
-		entity.date = row['DATE']
-		entity.distance = row['DISTANCE']
-		table_service.insert_entity('dataset', entity)
+
+        out_file.writelines(unique_everseen(csvfile))
+        
 #         writer.writerow(row)
     	
 # shutil.move(tempfile.name, filename)
 
-
-
+with open('222.csv','r',newline='') as csvfile:
+    reader = csv.DictReader(csvfile, fieldnames=fields)
+    # writer = csv.DictWriter(tempfile, fieldnames=fields)
+    for row in reader:
+        entity = Entity()
+        entity.PartitionKey = row['TRAJ_ID']
+        entity.RowKey = row['MATCHED_EDGE']
+        entity.s_long = row['MATCHED_EDGE_S_LNG']
+        entity.s_lat = row['MATCHED_EDGE_S_LAT']
+        entity.e_long = row['MATCHED_EDGE_E_LNG']
+        entity.e_lat = row['MATCHED_EDGE_E_LAT']
+        entity.taxi_id = row['TAXI']
+        entity.date = row['DATE']
+        entity.distance = row['DISTANCE']
+        table_service.insert_entity('STTrajectory', entity)
 
 
 

@@ -2,7 +2,16 @@ package project.bdss.data;
 
 import com.microsoft.azure.storage.table.TableServiceEntity;
 
-public class STTrajectory extends TableServiceEntity {
+public class STTrajectoryEntity extends TableServiceEntity {
+	
+	public STTrajectoryEntity(String hour, String edge_id) {
+		this.partitionKey = hour;
+		this.rowKey = edge_id;
+	}
+	
+	public STTrajectoryEntity() {
+		
+	}
 
 	String hour;
 	String edge_id;
@@ -13,27 +22,22 @@ public class STTrajectory extends TableServiceEntity {
 	String taxi_id;
 	String date;
 	String distance;
-	String speed;
-	
-	public STTrajectory() {
-		
-	}
 
-	public String getHour() {
-		return hour;
-	}
-
-	public void setHour(String hour) {
-		this.hour = hour;
-	}
-
-	public String getEdge_id() {
-		return edge_id;
-	}
-
-	public void setEdge_id(String edge_id) {
-		this.edge_id = edge_id;
-	}
+//	public String getHour() {
+//		return hour;
+//	}
+//
+//	public void setHour(String hour) {
+//		this.hour = hour;
+//	}
+//
+//	public String getEdge_id() {
+//		return edge_id;
+//	}
+//
+//	public void setEdge_id(String edge_id) {
+//		this.edge_id = edge_id;
+//	}
 
 	public String getS_long() {
 		return s_long;
@@ -89,13 +93,5 @@ public class STTrajectory extends TableServiceEntity {
 
 	public void setDistance(String distance) {
 		this.distance = distance;
-	}
-
-	public String getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(String speed) {
-		this.speed = speed;
 	}
 }
