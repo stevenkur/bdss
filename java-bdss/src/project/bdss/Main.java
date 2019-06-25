@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
+import javax.swing.text.DateFormatter;
+import javax.swing.text.DefaultFormatterFactory;
 
 import processing.core.PApplet;
 
@@ -12,8 +14,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,6 +26,9 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -42,10 +50,9 @@ public class Main {
 	private JLabel lblFooter;
 	private JButton btnUpload;
 	private JLabel lblResponse;
-	private JTextField tfStartTime;
+	private JFormattedTextField tfStartTime;
 	private JTextField tfDuration;
-	private JTextField tfLatitude;
-	private JTextField tfLongitude;
+	private JTextField tfEdge;
 	private Connection con;
 
 	/**
@@ -72,7 +79,7 @@ public class Main {
 	public Main() throws InvalidKeyException, URISyntaxException {
 		con = new Connection();
 		con.Initialize();
-		con.ListTable();
+		//con.ListTable();
 		
 		initialize();
 	}
@@ -222,8 +229,17 @@ public class Main {
 	}
 	
 	public void QueryPanel() {
-		tfStartTime = new JTextField();
+		tfStartTime = new JFormattedTextField();
+		tfStartTime.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter(new SimpleDateFormat("HH:mm"))));
 		tfStartTime.setBounds(80, 5, 250, 25);
+		tfStartTime.setValue(Calendar.getInstance().getTime());
+//		tfStartTime.addPropertyChangeListener("value", new PropertyChangeListener() {
+//			
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//	            System.out.println(tfStartTime.getValue());
+//			}
+//		});
 		queryPanel.add(tfStartTime);
 		tfStartTime.setColumns(10);
 		
@@ -232,15 +248,10 @@ public class Main {
 		queryPanel.add(tfDuration);
 		tfDuration.setColumns(10);
 		
-		tfLatitude = new JTextField();
-		tfLatitude.setBounds(410, 5, 250, 25);
-		queryPanel.add(tfLatitude);
-		tfLatitude.setColumns(10);
-		
-		tfLongitude = new JTextField();
-		tfLongitude.setColumns(10);
-		tfLongitude.setBounds(410, 35, 250, 25);
-		queryPanel.add(tfLongitude);
+		tfEdge = new JTextField();
+		tfEdge.setBounds(410, 5, 250, 25);
+		queryPanel.add(tfEdge);
+		tfEdge.setColumns(10);
 		
 		JLabel lblStartTime = new JLabel("Start time");
 		lblStartTime.setBounds(10, 5, 60, 25);
@@ -252,15 +263,10 @@ public class Main {
 		lblDuration.setHorizontalAlignment(SwingConstants.RIGHT);
 		queryPanel.add(lblDuration);
 		
-		JLabel lblLatitude = new JLabel("Latitude");
-		lblLatitude.setBounds(340, 5, 60, 25);
-		lblLatitude.setHorizontalAlignment(SwingConstants.RIGHT);
-		queryPanel.add(lblLatitude);
-		
-		JLabel lblLongitude = new JLabel("Longitude");
-		lblLongitude.setBounds(340, 35, 60, 25);
-		lblLongitude.setHorizontalAlignment(SwingConstants.RIGHT);
-		queryPanel.add(lblLongitude);
+		JLabel lblEdge = new JLabel("Edge");
+		lblEdge.setBounds(340, 5, 60, 25);
+		lblEdge.setHorizontalAlignment(SwingConstants.RIGHT);
+		queryPanel.add(lblEdge);
 		
 		JButton btnSearch = new JButton("QUERY");
 		btnSearch.setFont(new Font("Gulim", Font.PLAIN, 12));
@@ -272,10 +278,13 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				String startTime = tfStartTime.getText();
 				String duration = tfDuration.getText();
-				String latitude = tfLatitude.getText();
-				String longitude = tfLongitude.getText();
+				String edge = tfEdge.getText();
 				
-				PApplet.main(new String[] { UnfoldingMaps.class.getName() });
+				startTime = startTime.replace(":","");
+				
+				con.QueryST(startTime, duration, edge);
+				
+				//PApplet.main(new String[] { UnfoldingMaps.class.getName() });
 			}
 		});
 	}

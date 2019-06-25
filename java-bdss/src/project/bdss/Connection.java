@@ -46,7 +46,7 @@ public class Connection {
 		}
 	}
 	
-	public void QueryST() {
+	public void QueryST(String startTime, String duration, String edge) {
 		try
 		{
 		    // Define constants for filters.
@@ -64,13 +64,13 @@ public class Connection {
 		    String partitionFilter = TableQuery.generateFilterCondition(
 		        PARTITION_KEY,
 		        QueryComparisons.EQUAL,
-		        "Smith");
+		        startTime);
 
 		    // Create a filter condition where the row key is less than the letter "E".
 		    String rowFilter = TableQuery.generateFilterCondition(
 		        ROW_KEY,
-		        QueryComparisons.LESS_THAN,
-		        "E");
+		        QueryComparisons.EQUAL,
+		        edge);
 
 		    // Combine the two conditions into a filter expression.
 		    String combinedFilter = TableQuery.combineFilters(partitionFilter,
@@ -146,5 +146,9 @@ public class Connection {
 		    // Output the stack trace.
 		    e.printStackTrace();
 		}
+	}
+	
+	public void CheckNext() {
+		
 	}
 }
