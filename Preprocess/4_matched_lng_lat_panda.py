@@ -14,7 +14,7 @@ fields = ['TRAJ_ID',
 # 'MATCHED_NODE_LNG', 'MATCHED_NODE_LAT']
 file_input = 'hasil_match.csv'
 file_edge = 'Edge.csv'
-file_traj = 'traj2.csv'
+file_traj = 'traj.csv'
 file_output = 'matched_trajectory.csv'
 
 def ambil_data():
