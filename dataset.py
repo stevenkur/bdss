@@ -42,14 +42,14 @@ for x in range(1,2): #10358 ~ data dari 1-10357
 
 			entity = Entity()
 			entity.PartitionKey = partitionkey
-			entity.RowKey = str(i)
-			entity.userid = userid
-			entity.t_date = date
-			entity.t_hour = hour
-			entity.t_minute = minute
-			entity.t_second = second
-			entity.longitude = longitude
-			entity.latitude = latitude
+			entity.RowKey = edge_id
+			entity.s_long = s_long
+			entity.s_lat = s_lat
+			entity.e_long = e_long
+			entity.e_lat = e_lat
+			entity.taxi_id = taxi_id
+			entity.date = date
+			entity.distance = distance
 			table_service.insert_entity('dataset', entity)
 
 			i += 1
