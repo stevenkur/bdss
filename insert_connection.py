@@ -13,13 +13,13 @@ filename = 'matched_trajectory.csv'
 tempfile = NamedTemporaryFile(mode='w', delete=False,newline='')
 
 fields = ['TAXI',
-'EDGE_ID'
+'EDGE_ID',
 'CUR_EDGE', 
 'PREVIOUS',
 'NEXT'
 ]
 
-with open('edge_connect.csv','r',newline='') as csvfile:
+with open('111.csv','r',newline='') as csvfile:
     reader = csv.DictReader(csvfile, fieldnames=fields)
     # writer = csv.DictWriter(tempfile, fieldnames=fields)
     for row in reader:

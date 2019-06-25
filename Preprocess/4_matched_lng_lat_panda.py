@@ -105,7 +105,7 @@ def merge_data():
 	        row['DATE'] = partitionkey_split[1]
 	        edgenya = row['MATCHED_EDGE']
 	        taxi = row['TAXI']
-	        row['EDGE_ID'] = edgenya+"_"+taxi
+	        row['EDGE_ID'] = edgenya+"_"+taxi+"_"+row['DATE']
 	        ##################
 	        coords_1 = (float(row['MATCHED_EDGE_S_LAT']), float(row['MATCHED_EDGE_S_LNG']))
 	        coords_2 = (float(row['MATCHED_EDGE_E_LAT']),float(row['MATCHED_EDGE_E_LNG']))

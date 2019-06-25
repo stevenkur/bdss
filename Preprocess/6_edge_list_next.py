@@ -85,7 +85,7 @@ def merge_data():
 	    				previous_edge = edge_each[edges-1]
 	    			row = {
 	    			'TAXI': taxi,
-	    			'DATE_EDGE': str(date) + "_" +str(traj)+ "_" + str(current_edge),
+	    			'DATE_EDGE': str(taxi)+"_"+str(date)+"_"+str(current_edge)+"_"+str(previous_edge)+"_"+str(next_edge),
 	    			'EDGE': current_edge,
 	    			'PREVIOUS': previous_edge,
 	    			'NEXT': next_edge
@@ -103,7 +103,7 @@ def merge_data():
 	    		date = row['DATE']
 	    		traj = row['TRAJ_ID']
 	    		edge_list = data.loc[int(row['TAXI']),int(row['DATE'])]['MATCHED_EDGE']
-	    		print(edge_list)
+	    		# print(edge_list)
 	    		edge_each = edge_list.values.tolist()
 	    		for edges in range(len(edge_each)):
 	    			current_edge = edge_each[edges]
@@ -118,7 +118,7 @@ def merge_data():
 	    				previous_edge = edge_each[edges-1]
 	    			row = {
 	    			'TAXI': taxi,
-	    			'DATE_EDGE': str(date) + "_" +str(traj)+ "_" + str(current_edge),
+	    			'DATE_EDGE': str(taxi)+"_"+str(date)+"_"+str(current_edge)+"_"+str(previous_edge)+"_"+str(next_edge),
 	    			'EDGE': current_edge,
 	    			'PREVIOUS': previous_edge,
 	    			'NEXT': next_edge

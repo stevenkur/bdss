@@ -25,7 +25,7 @@ fields = ['TRAJ_ID',
 ]
 
 seen = set() # set for fast O(1) amortized lookup
-with open(filename,'r',newline='') as csvfile, open('222.csv','w') as out_file:
+with open(filename,'r',newline='') as csvfile, open('223.csv','w') as out_file:
     reader = csv.DictReader(csvfile, fieldnames=fields)
     # writer = csv.DictWriter(tempfile, fieldnames=fields)
     for row in reader:
@@ -35,7 +35,7 @@ with open(filename,'r',newline='') as csvfile, open('222.csv','w') as out_file:
     	
 # shutil.move(tempfile.name, filename)
 
-with open('222.csv','r',newline='') as csvfile:
+with open('223.csv','r',newline='') as csvfile:
     reader = csv.DictReader(csvfile, fieldnames=fields)
     # writer = csv.DictWriter(tempfile, fieldnames=fields)
     for row in reader:
