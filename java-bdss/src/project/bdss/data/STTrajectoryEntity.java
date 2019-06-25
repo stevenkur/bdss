@@ -9,20 +9,17 @@ public class STTrajectoryEntity extends TableServiceEntity {
 		this.rowKey = edge_id;
 	}
 	
-	public STTrajectoryEntity() {
-		
-	}
+	public STTrajectoryEntity() { }
 
-	String hour;
-	String edge_id;
+	String date;
+	String distance;
 	String s_long;
 	String s_lat;
 	String e_long;
 	String e_lat;
 	String taxi_id;
-	String date;
-	String distance;
-
+	
+	
 //	public String getHour() {
 //		return hour;
 //	}

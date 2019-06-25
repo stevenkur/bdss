@@ -52,6 +52,11 @@ public class Connection {
 		    // Define constants for filters.
 		    final String PARTITION_KEY = "PartitionKey";
 		    final String ROW_KEY = "RowKey";
+		    
+		    CloudStorageAccount storageAccount =
+			        CloudStorageAccount.parse(connectionString);
+		    
+		    CloudTableClient tableClient = storageAccount.createCloudTableClient();
 
 		    // Create a cloud table object for the table.
 		    CloudTable cloudTable = tableClient.getTableReference("STTrajectory"); // table name
@@ -82,7 +87,8 @@ public class Connection {
 		    for (STTrajectoryEntity entity : cloudTable.execute(rangeQuery)) {
 		        System.out.println(entity.getPartitionKey() +
 		            " " + entity.getRowKey() +
-		            " " + entity.getTaxi_id());
+		            " " + entity.getTaxi_id() +
+		            " " + entity.getDate());
 		    }
 		}
 		catch (Exception e)
