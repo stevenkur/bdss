@@ -2,12 +2,15 @@ package project.bdss;
 
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
+import java.util.ArrayList;
+import java.util.List;
 
 //Include the following imports to use table APIs
 import com.microsoft.azure.storage.*;
 import com.microsoft.azure.storage.table.*;
 import com.microsoft.azure.storage.table.TableQuery.*;
 
+import project.bdss.data.ConTrajectoryEntity;
 import project.bdss.data.CustomerEntity;
 import project.bdss.data.STTrajectoryEntity;
 
@@ -26,11 +29,13 @@ public class Connection {
 	public void ListTable() {
 		try
 		{
+			int i = 0;
 		    // Loop through the collection of table names.
 		    for (String table : tableClient.listTables())
 		    {
 		        // Output each table name.
-		        System.out.println(table);
+		        System.out.println("Table" + i + ": " + table);
+		        i++;
 		    }
 		}
 		catch (Exception e)
@@ -40,7 +45,9 @@ public class Connection {
 		}
 	}
 	
-	public void QueryST(String startTime, String duration, String edge) {
+	@SuppressWarnings("null")
+	public List<String> QueryST(String startTime, String duration, String edge) {
+	    List<String> taxi = new ArrayList<String>();
 		try
 		{
 		    // Define constants for filters.
@@ -50,13 +57,11 @@ public class Connection {
 		    // Create a cloud table object for the table.
 		    CloudTable cloudTable = tableClient.getTableReference("STTrajectory"); // table name
 
-		    // Create a filter condition where the partition key is "Smith".
 		    String partitionFilter = TableQuery.generateFilterCondition(
 		        PARTITION_KEY,
 		        QueryComparisons.EQUAL,
 		        startTime);
 
-		    // Create a filter condition where the row key is less than the letter "E".
 		    String rowFilter = TableQuery.generateFilterCondition(
 		        ROW_KEY,
 		        QueryComparisons.EQUAL,
@@ -66,23 +71,24 @@ public class Connection {
 		    String combinedFilter = TableQuery.combineFilters(partitionFilter,
 		        Operators.AND, rowFilter);
 
-		    // Specify a range query, using "Smith" as the partition key,
-		    // with the row key being up to the letter "E".
+		    // Specify a range query
 		    TableQuery<STTrajectoryEntity> rangeQuery =
 		        TableQuery.from(STTrajectoryEntity.class)
 		        .where(combinedFilter);
 
 		    // Loop through the results, displaying information about the entity
 		    for (STTrajectoryEntity entity : cloudTable.execute(rangeQuery)) {
-		        System.out.println(entity.getPartitionKey() +
+		        System.out.println("STTrajectory: " + entity.getPartitionKey() +
 		            " " + entity.getRowKey() +
 		            " " + entity.getS_long() +
 		            " " + entity.getS_lat() +
 		            " " + entity.getE_long() +
 		            " " + entity.getE_lat() +
-		            " " + entity.getTaxi_id() +
+		            " " + entity.getEdge_id() +
 		            " " + entity.getDistance() +
+		            " " + entity.getTaxi_id() +
 		            " " + entity.getDate());
+		    	taxi.add(entity.getTaxi_id());
 		    }
 		}
 		catch (Exception e)
@@ -90,9 +96,47 @@ public class Connection {
 		    // Output the stack trace.
 		    e.printStackTrace();
 		}
+		return taxi;
 	}
 	
-	public void CheckNext() {
+	@SuppressWarnings("null")
+	public List<String> QueryCon(String edge) {
+	    List<String> branch = new ArrayList<String>();
+		try
+		{
+		    // Define constants for filters.
+		    final String PARTITION_KEY = "PartitionKey";
+
+		    // Create a cloud table object for the table.
+		    CloudTable cloudTable = tableClient.getTableReference("ConTrajectory"); // table name
+
+		    // Create a filter condition where the partition key is "Smith".
+		    String partitionFilter = TableQuery.generateFilterCondition(
+		        PARTITION_KEY,
+		        QueryComparisons.EQUAL,
+		        edge);
+
+		    // Specify a range query, using "Smith" as the partition key,
+		    // with the row key being up to the letter "E".
+		    TableQuery<ConTrajectoryEntity> partitionQuery  =
+		        TableQuery.from(ConTrajectoryEntity.class)
+		        .where(partitionFilter);
+
+		    // Loop through the results, displaying information about the entity
+		    for (ConTrajectoryEntity entity : cloudTable.execute(partitionQuery )) {
+		    	System.out.println("ConTrajectory: " + entity.getRowKey());
+		        branch.add(entity.getRowKey());
+		    }
+		}
+		catch (Exception e)
+		{
+		    // Output the stack trace.
+		    e.printStackTrace();
+		}
+		return branch;
+	}
+	
+	public void Check() {
 		
 	}
 }

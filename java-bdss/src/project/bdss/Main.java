@@ -9,6 +9,8 @@ import javax.swing.text.DefaultFormatterFactory;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -20,6 +22,7 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -70,7 +73,7 @@ public class Main {
 	public Main() throws InvalidKeyException, URISyntaxException {
 		con = new Connection();
 		con.Initialize();
-		//con.ListTable();
+		con.ListTable();
 		
 		initialize();
 	}
@@ -267,16 +270,39 @@ public class Main {
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String startTime = tfStartTime.getText();
-				String duration = tfDuration.getText();
-				String edge = tfEdge.getText();
-				
-				startTime = startTime.replace(":","");
-				
-				//con.QueryST(startTime, duration, edge);
-				con.QueryST("0015", "10", "23362");
-				
-				//PApplet.main(new String[] { UnfoldingMaps.class.getName() });
+				if (!tfStartTime.getText().equals("") && !tfDuration.getText().equals("") && !tfEdge.getText().equals("")) {
+					String hour = tfStartTime.getText().split(":")[0];
+					String minute = tfStartTime.getText().split(":")[1];
+					
+					Integer quarter = Integer.valueOf(minute) / 15; 
+					switch(quarter) {
+						case 0:
+							minute = "00";
+						case 15:
+							minute = "15";
+						case 30:
+							minute = "30";
+						case 45:
+							minute = "45";						
+					}
+					
+					String startTime = hour + minute;
+					System.out.println(startTime);
+					String duration = tfDuration.getText();
+					String edge = tfEdge.getText();
+
+					//con.QueryST("0015", "10", "23362");
+					List<String> taxi = con.QueryST(startTime, duration, edge);
+					System.out.println(taxi);
+					for(int i = 0; i < taxi.size(); i++) {
+						
+					}
+					
+					//PApplet.main(new String[] { UnfoldingMaps.class.getName() });
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "All field must be filled!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}
