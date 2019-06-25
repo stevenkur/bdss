@@ -7,6 +7,8 @@ import javax.swing.SwingConstants;
 import javax.swing.text.DateFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 
+import project.bdss.data.STTrajectoryEntity;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,7 +23,10 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
@@ -293,9 +298,20 @@ public class Main {
 
 					//con.QueryST("0015", "10", "23362");
 					List<String> taxi = con.QueryST(startTime, duration, edge);
+					HashSet<String> selected_edge = new HashSet<String>();
+					HashMap<String, String> matched_latlong = new HashMap<String, String>();
 					System.out.println(taxi);
 					for(int i = 0; i < taxi.size(); i++) {
+						int check_dur = Integer.valueOf(duration);
+						while(check_dur > 0) {
+							selected_edge.add(edge);
+							con.QueryCon(taxi.get(i), edge);
+							// BELUM
+						}
 						
+						for(int k = 0; k < selected_edge.size(); k++) {
+							//List<STTrajectoryEntity> data = con.QueryLatLong(taxi.get(i), selected_edge[k]);
+						}
 					}
 					
 					//PApplet.main(new String[] { UnfoldingMaps.class.getName() });

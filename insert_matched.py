@@ -9,17 +9,19 @@ the_connection_string = "DefaultEndpointsProtocol=https;AccountName=bigdatasyste
 table_service = TableService(endpoint_suffix = "table.cosmos.azure.com", connection_string = the_connection_string)
 
 
-filename = 'matched_trajectory.csv'
+filename = '222.csv'
 tempfile = NamedTemporaryFile(mode='w', delete=False,newline='')
 
 fields = ['TRAJ_ID',
+'EDGE_ID',
 'MATCHED_EDGE', 
 'MATCHED_EDGE_S_LNG', 'MATCHED_EDGE_S_LAT',
 'MATCHED_EDGE_E_LNG', 'MATCHED_EDGE_E_LAT',
 'TAXI',
 'DATE',
 'DISTANCE',
-'TIMESTAMP'
+'TIMESTAMP',
+'TIME_SPENT'
 ]
 
 seen = set() # set for fast O(1) amortized lookup
@@ -27,36 +29,6 @@ with open(filename,'r',newline='') as csvfile, open('222.csv','w') as out_file:
     reader = csv.DictReader(csvfile, fieldnames=fields)
     # writer = csv.DictWriter(tempfile, fieldnames=fields)
     for row in reader:
-        # ######### first time matched
-        # trajid = row['TRAJ_ID']
-        # with open('traj2.csv','r',newline='') as timefile:
-        #     readtime = csv.DictReader(timefile)
-        #     for roww in readtime:
-        #         if (trajid == roww['TRAJ_ID']):
-        #             timestamp = roww['TIMESTAMP']
-        #             row['TIMESTAMP'] = timestamp
-        # partitionkey_split = trajid.split("_")
-        # row['TRAJ_ID'] = partitionkey_split[2]+partitionkey_split[3]
-        # row['TAXI'] = partitionkey_split[0]
-        # row['DATE'] = partitionkey_split[1]
-        # ##################
-        # coords_1 = (float(row['MATCHED_EDGE_S_LAT']), float(row['MATCHED_EDGE_S_LNG']))
-        # coords_2 = (float(row['MATCHED_EDGE_E_LAT']),float(row['MATCHED_EDGE_E_LNG']))
-        # distance = geopy.distance.vincenty(coords_1,coords_2).m
-        # row['DISTANCE'] = distance
-        # row = {
-        # 'TRAJ_ID': row['TRAJ_ID'], 
-        # 'MATCHED_EDGE': row['MATCHED_EDGE'], 
-        # 'MATCHED_EDGE_S_LNG': row['MATCHED_EDGE_S_LNG'] , 
-        # 'MATCHED_EDGE_S_LAT': row['MATCHED_EDGE_S_LAT'] ,
-        # 'MATCHED_EDGE_E_LNG': row['MATCHED_EDGE_E_LNG'], 
-        # 'MATCHED_EDGE_E_LAT':row['MATCHED_EDGE_E_LAT'] ,
-        # 'TAXI': row['TAXI'],
-        # 'DATE': row['DATE'],
-        # 'DISTANCE': row['DISTANCE'],
-        # 'TIMESTAMP': row['TIMESTAMP']
-        # }
-
         out_file.writelines(unique_everseen(csvfile))
         
 #         writer.writerow(row)
@@ -69,7 +41,8 @@ with open('222.csv','r',newline='') as csvfile:
     for row in reader:
         entity = Entity()
         entity.PartitionKey = row['TRAJ_ID']
-        entity.RowKey = row['MATCHED_EDGE']
+        entity.RowKey = row['EDGE_ID']
+        entity.Edge_id = row['MATCHED_EDGE']
         entity.S_long = row['MATCHED_EDGE_S_LNG']
         entity.S_lat = row['MATCHED_EDGE_S_LAT']
         entity.E_long = row['MATCHED_EDGE_E_LNG']
@@ -77,6 +50,7 @@ with open('222.csv','r',newline='') as csvfile:
         entity.Taxi_id = row['TAXI']
         entity.Date = row['DATE']
         entity.Distance = row['DISTANCE']
+        entity.Time_spent = row['TIME_SPENT']
         table_service.insert_entity('STTrajectory', entity)
 
 

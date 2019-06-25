@@ -19,6 +19,7 @@ public class STTrajectoryEntity extends TableServiceEntity {
 	String e_lat;
 	String taxi_id;
 	String edge_id;
+	String time_spent;
 
 	public String getS_long() {
 		return s_long;
@@ -82,5 +83,13 @@ public class STTrajectoryEntity extends TableServiceEntity {
 
 	public void setEdge_id(String edge_id) {
 		this.edge_id = edge_id;
+	}
+
+	public String getTime_spent() {
+		return time_spent;
+	}
+
+	public void setTime_spent(String time_spent) {
+		this.time_spent = time_spent;
 	}
 }
