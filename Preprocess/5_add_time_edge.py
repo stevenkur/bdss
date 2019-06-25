@@ -70,9 +70,10 @@ def merge_data():
 	        # coords_2 = (float(row['MATCHED_EDGE_E_LAT']),float(row['MATCHED_EDGE_E_LNG']))
 	        # distance = geopy.distance.vincenty(coords_1,coords_2).m
 	        # row['DISTANCE'] = distance
-	        total_distance = data.loc[int(row['TRAJ_ID']),int(row['TAXI']),int(row['DATE'])]['MATCHED_EDGE']
+	        total_distance = data.loc[int(row['TRAJ_ID']),int(row['TAXI']),int(row['DATE'])]['DISTANCE']
 	        total = total_distance.sum()
 	        time_spent = round(15*(float(row['DISTANCE'])/total),3)
+	        # print(time_spent)
 	        row['TIME_EDGE'] = time_spent
 	        row = {
 	        'TRAJ_ID': row['TRAJ_ID'],
