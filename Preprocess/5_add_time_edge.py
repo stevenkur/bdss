@@ -16,7 +16,7 @@ fields = ['TRAJ_ID',
 file_input = 'hasil_match.csv'
 file_edge = 'Edge.csv'
 file_traj = 'traj.csv'
-file_output = 'matched_trajectory.csv'
+file_output = '222.csv'
 
 
 
@@ -48,7 +48,7 @@ def merge_data():
 	    reader = csv.DictReader(csvfile, fieldnames=outfields)
 	    writer = csv.DictWriter(tempfile, fieldnames=outfields)
 	    next(reader)
-	    data = pd.read_csv('matched_trajectory.csv',index_col=[0,7,8])
+	    data = pd.read_csv('222_see.csv',index_col=[0,7,8])
 	    for row in reader:
 	        ######### first time matched
 	        # trajid = row['TRAJ_ID']
@@ -70,7 +70,7 @@ def merge_data():
 	        # coords_2 = (float(row['MATCHED_EDGE_E_LAT']),float(row['MATCHED_EDGE_E_LNG']))
 	        # distance = geopy.distance.vincenty(coords_1,coords_2).m
 	        # row['DISTANCE'] = distance
-	        total_distance = data.loc[int(row['TRAJ_ID']),int(row['TAXI']),int(row['DATE'])]['DISTANCE']
+	        total_distance = data.loc[int(row['TRAJ_ID']),int(row['TAXI']),int(row['DATE'])]['MATCHED_EDGE']
 	        total = total_distance.sum()
 	        time_spent = round(15*(float(row['DISTANCE'])/total),3)
 	        row['TIME_EDGE'] = time_spent
