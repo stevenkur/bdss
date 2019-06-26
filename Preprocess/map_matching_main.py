@@ -1,9 +1,11 @@
 from map_match import *
 from multiprocessing import cpu_count, Pool
 
-traj_file = 'traj.csv'
-out_file = 'hasil_match.csv'
-def main():
+
+
+def main_match(traj_input):
+	traj_file = traj_input
+	out_file = 'hasil_match.csv'
 	trajectory = pd.read_csv(traj_file, usecols=['TRAJ_ID','LON','LAT'])
 	trajectory = data_convert(trajectory)
 	pool = Pool()
@@ -15,5 +17,5 @@ def main():
 	match_results.to_csv(r'hasil_match.csv')
 
 if __name__ == "__main__":
-	main()
+	main_match()
 	
