@@ -25,5 +25,8 @@
 	<classpathentry kind="lib" path="azure-storage-blob-11.0.1.jar"/>
 	<classpathentry kind="lib" path="azure-storage-queue-10.0.1-Preview.jar"/>
 	<classpathentry kind="lib" path="jackson-core-2.9.9.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX12"/>
+	<classpathentry kind="lib" path="G4P.jar"/>
+	<classpathentry kind="lib" path="jython-standalone-2.7.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

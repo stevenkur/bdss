@@ -12,8 +12,8 @@ public class ConTrajectoryEntity extends TableServiceEntity {
 	public ConTrajectoryEntity() { }
 
 	String edge_id;
-	String previous;
-	String next;
+	String previous_edge;
+	String next_edge;
 	
 	public String getEdge_id() {
 		return edge_id;
@@ -23,19 +23,19 @@ public class ConTrajectoryEntity extends TableServiceEntity {
 		this.edge_id = edge_id;
 	}
 
-	public String getPrevious() {
-		return previous;
+	public String getPrevious_edge() {
+		return previous_edge;
 	}
 
-	public void setPrevious(String previous) {
-		this.previous = previous;
+	public void setPrevious_edge(String previous_edge) {
+		this.previous_edge = previous_edge;
 	}
 
-	public String getNext() {
-		return next;
+	public String getNext_edge() {
+		return next_edge;
 	}
 
-	public void setNext(String next) {
-		this.next = next;
+	public void setNext_edge(String next_edge) {
+		this.next_edge = next_edge;
 	}
 }
