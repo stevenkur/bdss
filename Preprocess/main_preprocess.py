@@ -1,6 +1,8 @@
 from prepare_traj_id import *
 from map_matching_main import *
 from augment_data import *
+from insert_connection import *
+from inser_matched import *
 import time
 
 
@@ -59,6 +61,9 @@ def main():
 	elapsed_time_all = time.time() - start_time_init
 	print('finish in: ', elapsed_time_all)
 	print(time_detail)
+
+	insert_connection()
+	insert_trajectory()
 	
 if __name__ == "__main__":
 	main()
